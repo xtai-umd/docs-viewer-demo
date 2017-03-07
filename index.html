@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+  <script src="https://app.box.com/js/static/select.js"></script>
+  <title>Box Testing</title>
+</head>
+<body>
+  <div class="container">
+    <br>
+    <div class="row">
+      <div class="col">
+        <h1>Box Viewer Demo</h1>
+        <hr>
+        <div class="row">
+          <div class="col-2">
+            <button class="btn btn-danger btn-block" type="button" onclick="select_box()">Select from Box</button>
+          </div>
+          <div class="col">
+            <div class="input-group">
+              <input id="box-input" stype="text" class="form-control" placeholder="Enter Box Share Link... e.g. 'https://umd.box.com/s/1x2soj4rb9nsd7fx521qcw9ixh2o4jcx'">
+              <span class="input-group-btn">
+                <button class="btn btn-danger" type="button" onclick="update_box()">Update Viewer</button>
+              </span>
+            </div>
+          </div>
+        </div>
+        <br>
+        <p>Link: <span id="box-link"><a href="https://umd.box.com/s/1x2soj4rb9nsd7fx521qcw9ixh2o4jcx" data-id="144231727693" data-access="open" data-name="testing.docx" data-type="file" data-permissions-can-download="true" data-permissions-can-preview="true" target="_blank">testing.docx</a></span></p>
+        <hr>
+        <h4>Viewer</h4>
+        <iframe id="box" src="https://app.box.com/embed_widget/s/1x2soj4rb9nsd7fx521qcw9ixh2o4jcx" width="100%" height="600" frameborder="0" allowfullscreen="allowfullscreen"></iframe>
+        <hr>
+        <p style="text-align: right;"><a href="https://issues.umd.edu/browse/LIBWEB-3612">LIBWEB-3612</a>, Box Viewer Demo</p>
+      </div>
+    </div>
+  </div>
+  <style type="text/css">
+    #box {
+      border: 1px solid #dedede;
+    }
+  </style>
+  <script type="text/javascript">
+    function update_box() {
+      update_box_iframe($('#box-input').val());
+    }
+
+    function update_box_iframe(link) {
+      var arr = link.split('/');
+      $('#box').attr('src', 'https://umd.app.box.com/embed_widget/s/' + arr[arr.length - 1] + '?view_file_only=true');
+    }
+
+    function select_box() {
+      var options = {
+        // to get clientId: https://umd.app.box.com/developers/services
+        clientId: 'tpq3q7b4haqm6om86knj8n6zt9qfym5y',
+        linkType: 'shared',
+        multiselect: true
+      };
+      var boxSelect = new BoxSelect(options);
+
+      var boxIsSupported = boxSelect.isBrowserSupported();
+      if (boxIsSupported === false) {
+        alert('Your browser is not supported by this Box plugin, please use Firefox or Chrome.');
+        return;
+      }
+
+      boxSelect.success(function(response) {
+        // console.log(response);
+        if (response.length > 0) {
+          update_box_iframe(response[0].url);
+          var links = '';
+          for (var i = 0; i < response.length; i++) {
+            links += '<a href=\"' + response[i].url
+                  + '\" data-id=\"' + response[i].id
+                  + '\" data-access=\"' + response[i].access
+                  + '\" data-name=\"' + response[i].name
+                  + '\" data-type=\"' + response[i].type
+                  + '\" data-permissions-can-download=\"' + response[i]['permissions'].can_download
+                  + '\" data-permissions-can-preview=\"' + response[i]['permissions'].can_preview
+                  + '\" target=\"_blank\">' + response[i].name + '</a>';
+            if (i !== (response.length - 1)) { links += ', '; }
+          }
+          $('#box-link').html(links);
+        }
+      });
+      boxSelect.cancel(function() {
+        boxSelect.closePopup();
+      });
+      boxSelect.launchPopup();
+    }
+  </script>
+</body>
+</html>
