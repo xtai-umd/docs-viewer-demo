@@ -47,7 +47,10 @@
 
     function update_box_iframe(link) {
       var arr = link.split('/');
-      $('#box').attr('src', 'https://umd.app.box.com/embed_widget/s/' + arr[arr.length - 1] + '?view_file_only=true');
+      if (arr.length <= 1) {
+        arr = ['1x2soj4rb9nsd7fx521qcw9ixh2o4jcx'];
+      }
+      $('#box').attr('src', 'https://umd.app.box.com/embed_widget/s/' + arr[arr.length - 1]);
     }
 
     function select_box() {
