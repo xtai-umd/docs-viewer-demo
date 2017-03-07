@@ -26,8 +26,7 @@
             </div>
           </div>
         </div>
-        <br>
-        <p>Link: <span id="box-link"><a href="https://umd.box.com/s/1x2soj4rb9nsd7fx521qcw9ixh2o4jcx" data-id="144231727693" data-access="open" data-name="testing.docx" data-type="file" data-permissions-can-download="true" data-permissions-can-preview="true" target="_blank">testing.docx</a></span></p>
+        <p id="box-link"></p>
         <hr>
         <h4>Viewer</h4>
         <iframe id="box" src="https://app.box.com/embed_widget/s/1x2soj4rb9nsd7fx521qcw9ixh2o4jcx" width="100%" height="600" frameborder="0" allowfullscreen="allowfullscreen"></iframe>
@@ -70,7 +69,7 @@
         // console.log(response);
         if (response.length > 0) {
           update_box_iframe(response[0].url);
-          var links = '';
+          var links = '<br>Box Select Links: ';
           for (var i = 0; i < response.length; i++) {
             links += '<a href=\"' + response[i].url
                   + '\" data-id=\"' + response[i].id
