@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+  <title>Docs Viewer Demo / Office Web Apps Viewer</title>
+</head>
+<body>
+  <div class="container">
+    <br>
+    <div class="row">
+      <div class="col">
+        <h1><a href="/">Docs Viewer Demo</a> / Office Web Apps Viewer</h1>
+        <hr>
+        <div class="row">
+          <div class="col">
+            <div class="input-group">
+              <input id="input" stype="text" class="form-control" placeholder="Enter a Vaild Office Document Link... e.g. 'www.snee.com/xml/xslt/sample.doc'">
+              <span class="input-group-btn">
+                <button class="btn btn-success" type="button" onclick="update_viewer()">Update Viewer</button>
+              </span>
+            </div>
+          </div>
+        </div>
+        <hr>
+        <h4>Viewer</h4>
+        <iframe id="office" src="https://view.officeapps.live.com/op/embed.aspx?src=https://umd.box.com/shared/static/s5smadxe63oj4xr0gsbzyet1fvusdhqs.doc" width="100%" height="600" frameborder="0" allowfullscreen="allowfullscreen"></iframe>
+        <hr>
+        <h4>Office Web Apps Viewer</h4>
+        <p>Only files under 25 MB can be previewed with the Google Drive viewer.</p>
+        <p><ul>
+          <li>Office Viewer Link: <a href="http://view.officeapps.live.com/op/view.aspx?src=https://umd.box.com/shared/static/s5smadxe63oj4xr0gsbzyet1fvusdhqs.doc" target="_blank">http://view.officeapps.live.com/op/view.aspx?src=[OFFICE_FILE_URL]</a></li>
+          <li>Office Viewer Embedded Link: <a href="https://view.officeapps.live.com/op/embed.aspx?src=https://umd.box.com/shared/static/s5smadxe63oj4xr0gsbzyet1fvusdhqs.doc" target="_blank">https://view.officeapps.live.com/op/embed.aspx?src=[OFFICE_FILE_URL]</a></li>
+        </ul></p>
+        <p>Office Viewer only previews office document types, listed below:</p>
+        <p><ol>
+          <li>Microsoft Word (.DOC and .DOCX)</li>
+          <li>Microsoft Excel (.XLS and .XLSX)</li>
+          <li>Microsoft PowerPoint (.PPT and .PPTX)</li>
+        </ol></p>
+        <hr>
+        <p style="text-align: right;"><a href="https://issues.umd.edu/browse/LIBWEB-3612">LIBWEB-3612</a> / <a href="/">Docs Viewer Demo</a> / Office Web Apps Viewer</p>
+      </div>
+    </div>
+  </div>
+  <style type="text/css">
+    #office {
+      border: 1px solid #dedede;
+    }
+  </style>
+  <script type="text/javascript">
+    function update_viewer() {
+      var link = $('#input').val()
+      if (link.length <= 1) {
+        link = 'https://umd.box.com/shared/static/s5smadxe63oj4xr0gsbzyet1fvusdhqs.doc';
+      }
+      $('#office').attr('src', 'https://docs.google.com/a/umd.edu/viewer?url=' + link + '&embedded=true');
+    }
+  </script>
+</body>
+</html>

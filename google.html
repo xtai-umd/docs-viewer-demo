@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+  <title>Docs Viewer Demo / Goolge Docs Viewer</title>
+</head>
+<body>
+  <div class="container">
+    <br>
+    <div class="row">
+      <div class="col">
+        <h1><a href="/">Docs Viewer Demo</a> / Goolge Docs Viewer</h1>
+        <hr>
+        <div class="row">
+          <div class="col">
+            <div class="input-group">
+              <input id="input" stype="text" class="form-control" placeholder="Enter a Vaild Document Link... e.g. 'www.snee.com/xml/xslt/sample.doc'">
+              <span class="input-group-btn">
+                <button class="btn btn-primary" type="button" onclick="update_viewer()">Update Viewer</button>
+              </span>
+            </div>
+          </div>
+        </div>
+        <hr>
+        <h4>Viewer</h4>
+        <iframe id="google" src="https://docs.google.com/a/umd.edu/viewer?url=https://umd.box.com/shared/static/s5smadxe63oj4xr0gsbzyet1fvusdhqs.doc&embedded=true" width="100%" height="600" frameborder="0" allowfullscreen="allowfullscreen"></iframe>
+        <hr>
+        <h4>Google Docs Viewer</h4>
+        <p>Only files under 25 MB can be previewed with the Google Drive viewer.</p>
+        <p><ul>
+          <li>Google Doc Link [UMD Domain]: <a href="https://docs.google.com/a/umd.edu/viewer?url=https://umd.box.com/shared/static/s5smadxe63oj4xr0gsbzyet1fvusdhqs.doc&embedded=true" target="_blank">https://docs.google.com/a/umd.edu/viewer?url=[file_url]&embedded=true</a></li>
+          <li>Google Doc Link: <a href="https://docs.google.com/viewer?url=https://umd.box.com/shared/static/s5smadxe63oj4xr0gsbzyet1fvusdhqs.doc&embedded=true" target="_blank">https://docs.google.com/viewer?url=[file_url]&embedded=true</a></li>
+        </ul></p>
+        <p>Google Docs viewer helps you preview over 16 different file types, listed below:</p>
+        <p><ol>
+          <li>Image files (.JPEG, .PNG, .GIF, .TIFF, .BMP)</li>
+          <li>Video files (WebM, .MPEG4, .3GPP, .MOV, .AVI, .MPEGPS, .WMV, .FLV)</li>
+          <li>Text files (.TXT)</li>
+          <li>Markup/Code (.CSS, .HTML, .PHP, .C, .CPP, .H, .HPP, .JS)</li>
+          <li>Microsoft Word (.DOC and .DOCX)</li>
+          <li>Microsoft Excel (.XLS and .XLSX)</li>
+          <li>Microsoft PowerPoint (.PPT and .PPTX)</li>
+          <li>Adobe Portable Document Format (.PDF)</li>
+          <li>Apple Pages (.PAGES)</li>
+          <li>Adobe Illustrator (.AI)</li>
+          <li>Adobe Photoshop (.PSD)</li>
+          <li>Tagged Image File Format (.TIFF)</li>
+          <li>Autodesk AutoCad (.DXF)</li>
+          <li>Scalable Vector Graphics (.SVG)</li>
+          <li>PostScript (.EPS, .PS)</li>
+          <li>TrueType (.TTF)</li>
+          <li>XML Paper Specification (.XPS)</li>
+          <li>Archive file types (.ZIP and .RAR)</li>
+        </ol></p>
+        <hr>
+        <p style="text-align: right;"><a href="https://issues.umd.edu/browse/LIBWEB-3612">LIBWEB-3612</a> / <a href="/">Docs Viewer Demo</a> / Goolge Docs Viewer</p>
+      </div>
+    </div>
+  </div>
+  <style type="text/css">
+    #google {
+      border: 1px solid #dedede;
+    }
+  </style>
+  <script type="text/javascript">
+    function update_viewer() {
+      var link = $('#input').val()
+      if (link.length <= 1) {
+        link = 'https://umd.box.com/shared/static/s5smadxe63oj4xr0gsbzyet1fvusdhqs.doc';
+      }
+      $('#google').attr('src', 'https://docs.google.com/a/umd.edu/viewer?url=' + link + '&embedded=true');
+    }
+  </script>
+</body>
+</html>
